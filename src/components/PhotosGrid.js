@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { GridList, GridTile } from 'material-ui/GridList';
 import { Link } from 'react-router';
 
@@ -20,7 +19,7 @@ const styles = {
   },
 };
 
-class Grid extends Component<void, Props, void> {
+export default class PhotosGrid extends Component<void, Props, void> {
   render() {
     const { photos } = this.props;
 
@@ -30,7 +29,7 @@ class Grid extends Component<void, Props, void> {
           {photos.map(({ id, title, thumbnailUrl, url }) => (
             <GridTile key={id} title={title}>
               <Link to={`/photos/${id}`}>
-                <img alt={title} src={thumbnailUrl} />
+                <img alt={title} height="150" src={thumbnailUrl || url} />
               </Link>
             </GridTile>
           ))}
@@ -39,7 +38,3 @@ class Grid extends Component<void, Props, void> {
     );
   }
 }
-
-export default connect(({ photos }) => ({
-  photos,
-}))(Grid);

@@ -3,13 +3,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ContentSort from 'material-ui/svg-icons/content/sort';
+// import ContentSort from 'material-ui/svg-icons/content/sort';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 
 import { all as allPhotos } from '../actions/photos';
+import { open as openModal } from '../actions/modals';
 
 type Props = {
   photos: Array<Photo>;
@@ -33,7 +34,7 @@ class Menu extends Component<void, Props, State> {
   }
 
   render() {
-    const { photo } = this.props;
+    const { openModal, photo } = this.props;
 
     return (
       <Toolbar>
@@ -51,10 +52,12 @@ class Menu extends Component<void, Props, State> {
           )}
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle text="Tri" />
-          <ContentSort style={{ color: '#9e9e9e', marginTop: 15 }} />
+          {/*
+            <ToolbarTitle text="Tri" />
+            <ContentSort style={{ color: '#9e9e9e', marginTop: 15 }} />
+          */}
           <ToolbarSeparator />
-          <RaisedButton label="Ajouter une image" primary />
+          <RaisedButton onClick={openModal.bind(null, 'createPhoto')} label="Ajouter une image" primary />
         </ToolbarGroup>
       </Toolbar>
     );
@@ -65,4 +68,5 @@ export default connect(({ photo }) => ({
   photo,
 }), {
   allPhotos,
+  openModal,
 })(Menu);

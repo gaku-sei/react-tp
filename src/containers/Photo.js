@@ -2,16 +2,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardHeader, CardMedia, CardTitle } from 'material-ui/Card';
 
 import { find as findPhoto, reinit as reinitPhoto } from '../actions/photos';
-
-const styles = {
-  card: {
-    margin: '20px auto',
-    width: '40%',
-  },
-};
+import PhotoCard from '../components/PhotoCard';
 
 class Photo extends Component {
   componentWillMount() {
@@ -31,17 +24,11 @@ class Photo extends Component {
   }
 
   render() {
-    const { photo: { albumId, title, url } } = this.props;
+    const { photo } = this.props;
 
     return (
       <div>
-        <Card style={styles.card}>
-          <CardHeader title={title} subtitle={`Album : ${albumId}`}>
-            <CardMedia overlay={<CardTitle title={title} />}>
-              <img alt={title} src={url} />
-            </CardMedia>
-          </CardHeader>
-        </Card>
+        <PhotoCard photo={photo} />
       </div>
     );
   }

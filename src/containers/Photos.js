@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Grid from './Grid';
+import PhotosGrid from '../components/PhotosGrid';
 
 const styles = {
   grid: {
@@ -13,9 +13,10 @@ const styles = {
 
 class Photos extends Component {
   render() {
+    const { photos } = this.props;
     return (
       <div style={styles.grid}>
-        <Grid />
+        <PhotosGrid photos={photos} />
       </div>
     );
   }

@@ -2,10 +2,10 @@
 
 import * as photosActions from '../actions/photos';
 
-export default (state = [], action = {}) => {
-  switch (action.type) {
+export default (state = [], { photo, type } = {}) => {
+  switch (type) {
     case photosActions.SUCCESS_FETCH_PHOTO:
-      return action.photo;
+      return photo;
     default:
       return state;
   }
