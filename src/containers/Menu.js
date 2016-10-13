@@ -16,25 +16,29 @@ type Props = {
 }
 
 type State = {
-  value: number;
+  albumId: number;
 }
 
 class Menu extends Component<void, Props, State> {
   state = {
-    value: 0,
+    albumId: 0,
   }
 
-  handleChange(event, index, value) {
-    this.setState({ value });
+  handleChange(event, index, albumId) {
+    const { allPhotos } = this.props;
+
+    allPhotos({ albumId });
+
+    this.setState({ albumId });
   }
 
   render() {
-    const { photos: [selectedPhoto = {}] } = this.props;
+    const { photo } = this.props;
 
     return (
       <Toolbar>
         <ToolbarGroup firstChild>
-          <DropDownMenu value={this.state.value} onChange={this.handleChange.bind(this)}>
+          <DropDownMenu value={this.state.albumId} onChange={this.handleChange.bind(this)}>
             <MenuItem value={0} primaryText="Tous les albums" />
             <MenuItem value={1} primaryText="Album 1" />
             <MenuItem value={2} primaryText="Album 2" />
@@ -42,8 +46,8 @@ class Menu extends Component<void, Props, State> {
             <MenuItem value={4} primaryText="Album 4" />
             <MenuItem value={5} primaryText="Album 5" />
           </DropDownMenu>
-          {!selectedPhoto ? null : (
-            <ToolbarTitle text={selectedPhoto.title} />
+          {!photo ? null : (
+            <ToolbarTitle text={photo.title} />
           )}
         </ToolbarGroup>
         <ToolbarGroup>
@@ -57,8 +61,8 @@ class Menu extends Component<void, Props, State> {
   }
 }
 
-export default connect(({ photos }) => ({
-  photos,
+export default connect(({ photo }) => ({
+  photo,
 }), {
   allPhotos,
 })(Menu);
