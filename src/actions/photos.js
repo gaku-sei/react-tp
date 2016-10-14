@@ -1,5 +1,7 @@
 /* @flow */
 
+import type { Dispatch } from 'redux'
+
 import config from '../config';
 
 export const FETCH_PHOTOS = 'FETCH_PHOTOS';
@@ -14,19 +16,19 @@ export const CREATE_PHOTO = 'CREATE_PHOTO';
 export const SUCCESS_CREATE_PHOTO = 'SUCCESS_CREATE_PHOTO';
 export const FAIL_CREATE_PHOTO = 'FAIL_CREATE_PHOTO';
 
-export const all = ({ albumId } = {}) => (dispatch) =>
+export const all = ({ albumId }: PhotoQuery = {}) => (dispatch: Dispatch) =>
   fetch(`${config.url}/photos?_limit=${config.defaultLimit}${albumId ? `&albumId=${albumId}` : ''}`)
     .then((res) => res.json())
     .then((photos) => dispatch({ photos, type: SUCCESS_FETCH_PHOTOS }))
     .catch((error) => dispatch({ error, type: FAIL_FETCH_PHOTOS }));
 
-export const find = (id) => (dispatch) =>
+export const find = (id: string) => (dispatch: Dispatch) =>
   fetch(`${config.url}/photos/${id}`)
     .then((res) => res.json())
     .then((photo) => dispatch({ photo, type: SUCCESS_FETCH_PHOTO }))
     .catch((error) => dispatch({ error, type: FAIL_FETCH_PHOTO }));
 
-export const create = (photo) => (dispatch) =>
+export const create = (photo: Photo) => (dispatch: Dispatch) =>
   fetch(`${config.url}/photos`, {
     body: JSON.stringify(photo),
     headers: {

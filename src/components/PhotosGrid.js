@@ -28,7 +28,7 @@ export default class PhotosGrid extends Component<void, Props, void> {
         <GridList cellHeight={150} cols={7} style={styles.gridList}>
           {photos.map(({ id, title, thumbnailUrl, url }) => (
             <GridTile key={id} title={title}>
-              <Link to={`/photos/${id}`}>
+              <Link to={`/photos/${(id)}`}>
                 <img alt={title} height="150" src={thumbnailUrl || url} />
               </Link>
             </GridTile>

@@ -13,7 +13,9 @@ import { all as allPhotos } from '../actions/photos';
 import { open as openModal } from '../actions/modals';
 
 type Props = {
-  photos: Array<Photo>;
+  allPhotos?: Function;
+  openModal?: Function;
+  photos?: Array<Photo>;
 }
 
 type State = {

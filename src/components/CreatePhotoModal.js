@@ -22,7 +22,7 @@ export default class CreatePhotoModal extends Component<void, Props, State> {
     photo: this.emptyPhoto,
   }
 
-  get emptyPhoto() {
+  get emptyPhoto(): Photo {
     return {
       albumId: null,
       title: '',
@@ -30,7 +30,7 @@ export default class CreatePhotoModal extends Component<void, Props, State> {
     };
   }
 
-  updatePhoto(field, event, value, ...rest) {
+  updatePhoto(field: string, event: Object, value: mixed) {
     this.setState({
       photo: {
         ...this.state.photo,

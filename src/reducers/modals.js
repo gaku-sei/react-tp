@@ -2,7 +2,11 @@
 
 import * as modalsActions from '../actions/modals';
 
-export default (state = {}, { kind, type } = {}) => {
+type ModalsAction = Action & {
+  kind: string;
+}
+
+export default (state: { [key: string]: string } = {}, { kind, type }: ModalsAction = {}) => {
   switch (type) {
     case modalsActions.OPEN_MODAL:
       return { ...state, [kind]: true };
