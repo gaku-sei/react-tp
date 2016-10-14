@@ -1,7 +1,7 @@
 type Photo = {
   id?: number;
   title?: string;
-  albumId?: number | null;
+  albumId?: string | number | null;
   thumbnailUrl?: string;
   url?: string;
 }

@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { all as allPhotos, create as createPhoto } from '../actions/photos';
 import { close as closeModal } from '../actions/modals';
+import { select as selectAlbum } from '../actions/album';
+
 import Menu from './Menu';
 import CreatePhotoModal from '../components/CreatePhotoModal';
 
@@ -14,11 +16,15 @@ class App extends Component {
     this.props.allPhotos();
   }
 
-  createPhoto(photo) {
+  async createPhoto({ albumId, ...rest }) {
     const { allPhotos, closeModal, createPhoto } = this.props;
 
-    createPhoto(photo);
-    allPhotos();
+    await createPhoto({ albumId, ...rest });
+
+    await allPhotos({ albumId });
+
+    selectAlbum(albumId);
+
     closeModal('createPhoto');
   }
 
@@ -47,4 +53,5 @@ export default connect(({ modals }) => ({
   allPhotos,
   closeModal,
   createPhoto,
+  selectAlbum,
 })(App);

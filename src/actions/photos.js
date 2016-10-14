@@ -18,7 +18,8 @@ export const FAIL_CREATE_PHOTO = 'FAIL_CREATE_PHOTO';
 
 export const all = ({ albumId }: PhotoQuery = {}) => async (dispatch: Dispatch) => {
   try {
-    const res = await fetch(`${config.url}/photos?_limit=${config.defaultLimit}${albumId ? `&albumId=${albumId}` : ''}`);
+    const query = albumId ? `albumId=${albumId}` : config.albumsNames.map((name) => `albumId=${name}`).join('&');
+    const res = await fetch(`${config.url}/photos?_limit=${config.defaultLimit}&${query}`);
     return dispatch({ photos: await res.json(), type: SUCCESS_FETCH_PHOTOS });
   } catch (error) {
     return dispatch({ error, type: FAIL_FETCH_PHOTOS });

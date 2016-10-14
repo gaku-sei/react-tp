@@ -9,45 +9,40 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 
+import { select as selectAlbum } from '../actions/album';
 import { all as allPhotos } from '../actions/photos';
 import { open as openModal } from '../actions/modals';
 
+import config from '../config';
+
 type Props = {
   allPhotos?: Function;
+  albumId?: ?string;
   openModal?: Function;
   photos?: Array<Photo>;
+  selectAlbum?: Function;
 }
 
-type State = {
-  albumId: number;
-}
+class Menu extends Component<void, Props, void> {
+  async handleChange(event, index, albumId) {
+    const { selectAlbum, allPhotos } = this.props;
 
-class Menu extends Component<void, Props, State> {
-  state = {
-    albumId: 0,
-  }
-
-  handleChange(event, index, albumId) {
-    const { allPhotos } = this.props;
+    await selectAlbum(albumId);
 
     allPhotos({ albumId });
-
-    this.setState({ albumId });
   }
 
   render() {
-    const { openModal, photo } = this.props;
+    const { albumId, openModal, photo } = this.props;
 
     return (
       <Toolbar>
         <ToolbarGroup firstChild>
-          <DropDownMenu value={this.state.albumId} onChange={this.handleChange.bind(this)}>
-            <MenuItem value={0} primaryText="Tous les albums" />
-            <MenuItem value={1} primaryText="Album 1" />
-            <MenuItem value={2} primaryText="Album 2" />
-            <MenuItem value={3} primaryText="Album 3" />
-            <MenuItem value={4} primaryText="Album 4" />
-            <MenuItem value={5} primaryText="Album 5" />
+          <DropDownMenu value={albumId} onChange={this.handleChange.bind(this)}>
+            <MenuItem value={null} primaryText="Tous les albums" />
+            {config.albumsNames.map((name, i) => (
+              <MenuItem key={i} value={name} primaryText={`Album ${name}`} />
+            ))}
           </DropDownMenu>
           {!photo ? null : (
             <ToolbarTitle text={photo.title} />
@@ -66,9 +61,11 @@ class Menu extends Component<void, Props, State> {
   }
 }
 
-export default connect(({ photo }) => ({
+export default connect(({ album: albumId, photo }) => ({
+  albumId,
   photo,
 }), {
   allPhotos,
   openModal,
+  selectAlbum,
 })(Menu);

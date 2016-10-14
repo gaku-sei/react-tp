@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
+import config from '../config';
+
 type Props = {
   onCreate: Function;
   onRequestClose: Function;
@@ -103,11 +105,9 @@ export default class CreatePhotoModal extends Component<void, Props, State> {
             onChange={(event, key, value) => this.updatePhoto('albumId', event, value)}
             value={photo.albumId}
           >
-            <MenuItem primaryText="Album 1" value={1} />
-            <MenuItem primaryText="Album 2" value={2} />
-            <MenuItem primaryText="Album 3" value={3} />
-            <MenuItem primaryText="Album 4" value={4} />
-            <MenuItem primaryText="Album 5" value={5} />
+            {config.albumsNames.map((name, i) => (
+              <MenuItem key={i} primaryText={`Album ${name}`} value={name} />
+            ))}
           </SelectField>
         </div>
       </Dialog>

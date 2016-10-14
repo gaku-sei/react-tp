@@ -29,7 +29,11 @@ export default class PhotosGrid extends Component<void, Props, void> {
           {photos.map(({ id, title, thumbnailUrl, url }) => (
             <GridTile key={id} title={title}>
               <Link to={`/photos/${(id)}`}>
-                <img alt={title} height="150" src={thumbnailUrl || url} />
+                <img
+                  alt={title}
+                  src={thumbnailUrl || url}
+                  style={{ height: '150px' }}
+                />
               </Link>
             </GridTile>
           ))}
