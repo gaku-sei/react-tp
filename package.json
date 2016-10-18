@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@types/react": "^0.14.41",
-    "@types/react-redux": "^4.4.32",
-    "@types/redux": "^3.6.31",
-    "@types/redux-form": "^4.0.30",
     "enzyme": "^2.4.1",
     "flow-bin": "^0.33.0",
     "react-addons-test-utils": "^15.3.2",

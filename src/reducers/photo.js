@@ -6,7 +6,7 @@ type PhotosActions = Action & {
   photo: Photo;
 }
 
-export default (state: Photo = {}, { photo, type }: PhotosActions = {}) => {
+export default (state: Object = {}, { photo, type }: PhotosActions = {}) => {
   switch (type) {
     case photosActions.SUCCESS_FETCH_PHOTO:
       return photo;

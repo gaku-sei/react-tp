@@ -16,11 +16,11 @@ import { open as openModal } from '../actions/modals';
 import config from '../config';
 
 type Props = {
-  allPhotos?: Function;
-  albumId?: ?string;
-  openModal?: Function;
-  photos?: Array<Photo>;
-  selectAlbum?: Function;
+  allPhotos: Function;
+  albumId?: string;
+  openModal: Function;
+  photo?: Photo;
+  selectAlbum: Function;
 }
 
 class Menu extends Component<void, Props, void> {

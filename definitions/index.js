@@ -1,9 +1,9 @@
 type Photo = {
-  id?: number;
-  title?: string;
-  albumId?: string | number | null;
+  id: number;
+  title: string;
+  albumId: string | number | null;
   thumbnailUrl?: string;
-  url?: string;
+  url: string;
 }
 
 type Action = {

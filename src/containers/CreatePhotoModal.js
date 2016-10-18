@@ -12,13 +12,10 @@ type Props = {
   onCreate: Function;
   onRequestClose: Function;
   open: boolean;
+  photo?: Photo;
 }
 
-type State = {
-  photo: Photo;
-}
-
-class CreatePhotoModal extends Component<void, Props, State> {
+class CreatePhotoModal extends Component<void, Props, void> {
   createPhoto() {
     const { photo, onCreate: create } = this.props;
 
