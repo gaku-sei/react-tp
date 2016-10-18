@@ -4,7 +4,7 @@ import { Card, CardHeader, CardMedia, CardTitle } from 'material-ui/Card';
 const styles = {
   card: {
     margin: '20px auto',
-    width: '40%',
+    width: '70%',
   },
 };
 

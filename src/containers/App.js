@@ -9,7 +9,7 @@ import { close as closeModal } from '../actions/modals';
 import { select as selectAlbum } from '../actions/album';
 
 import Menu from './Menu';
-import CreatePhotoModal from '../components/CreatePhotoModal';
+import CreatePhotoModal from './CreatePhotoModal';
 
 class App extends Component {
   componentWillMount() {
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   async createPhoto({ albumId, ...rest }) {
-    const { allPhotos, closeModal, createPhoto } = this.props;
+    const { allPhotos, closeModal, createPhoto, selectAlbum } = this.props;
 
     await createPhoto({ albumId, ...rest });
 
